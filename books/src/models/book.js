@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   Book.init({
     title: { type: DataTypes.STRING, allowNull: false },
     author: { type: DataTypes.STRING, allowNull: false },
-    available: { type: DataTypes.BOOLEAN, allowNull: false }
+    available: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
   }, {
     indexes: [
       {
