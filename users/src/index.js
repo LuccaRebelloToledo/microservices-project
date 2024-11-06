@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 4001;
 
 app.use(express.json());
 
-app.use(usersRouter);
+app.use('/users', usersRouter);
 
 app.use(globalErrorHandler);
 
