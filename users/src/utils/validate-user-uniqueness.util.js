@@ -1,5 +1,5 @@
-const findUserByCpf = require('./find-user-by-cpf.service');
-const findUserByEmail = require('./find-user-by-email.service');
+const findUserByCpf = require('../services/find-user-by-cpf.service');
+const findUserByEmail = require('../services/find-user-by-email.service');
 
 const AppError = require('../shared/errors/app-error');
 const AppErrorTypes = require('../shared/errors/app-error-types');

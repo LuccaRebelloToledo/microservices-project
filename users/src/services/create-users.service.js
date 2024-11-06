@@ -1,6 +1,6 @@
 const { User } = require('../models');
 
-const validateUserUniqueness = require('./validate-user-uniqueness.service');
+const validateUserUniqueness = require('../utils/validate-user-uniqueness.util');
 
 const createUsers = async (userDto) => {
   await validateUserUniqueness(userDto.email, userDto.cpf);
