@@ -2,6 +2,7 @@
 const {
   Model
 } = require('sequelize');
+const { BookStatus } = require('../constants/book.constants');
 module.exports = (sequelize, DataTypes) => {
   class Book extends Model {
     /**
@@ -16,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Book.init({
     title: { type: DataTypes.STRING, allowNull: false },
     author: { type: DataTypes.STRING, allowNull: false },
-    available: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: true }
+    status: { type: DataTypes.STRING, allowNull: false, defaultValue: BookStatus.AVAILABLE },
   }, {
     indexes: [
       {

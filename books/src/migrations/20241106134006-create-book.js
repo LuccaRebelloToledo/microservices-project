@@ -1,5 +1,7 @@
 'use strict';
 
+const { BookStatus } = require('../constants/book.constants');
+
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -18,10 +20,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      available: {
-        type: Sequelize.BOOLEAN,
+      status: {
+        type: Sequelize.STRING,
         allowNull: false,
-        defaultValue: true
+        defaultValue: BookStatus.AVAILABLE
       },
       createdAt: {
         type: Sequelize.DATE,

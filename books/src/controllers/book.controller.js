@@ -1,9 +1,9 @@
-const { showBooksSchema, createBooksSchema, updateBooksAvailableSchema } = require('../schemas/book.schema');
+const { showBooksSchema, createBooksSchema, updateBooksStatusSchema } = require('../schemas/book.schema');
 
 const listBooks = require('../services/list-books.service');
 const showBooks = require('../services/show-books.service');
 const createBooks = require('../services/create-books.service');
-const updateBooksAvailable = require('../services/update-books-available.service');
+const updateBooksStatus = require('../services/update-books-status.service');
 
 const { CREATED } = require('../shared/http/http-status-code');
 
@@ -38,10 +38,10 @@ class BookController {
     const id = parseInt(req.params.id, 10);
     await showBooksSchema.parseAsync({ id });
 
-    const availableData = req.body;
-    await updateBooksAvailableSchema.parseAsync(availableData);
+    const statusData = req.body;
+    await updateBooksStatusSchema.parseAsync(statusData);
 
-    const updatedBook = await updateBooksAvailable({ id, ...availableData });
+    const updatedBook = await updateBooksStatus({ id, ...statusData });
 
     return res.json(updatedBook);
   }
