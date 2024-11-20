@@ -8,11 +8,11 @@ const globalErrorHandler = require('./shared/middlewares/global-error-handler.mi
 const booksRouter = require('./routes/book.routes');
 
 const app = express();
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4002;
 
 app.use(express.json());
 
-app.use(booksRouter);
+app.use('/books', booksRouter);
 
 app.use(globalErrorHandler);
 

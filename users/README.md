@@ -15,7 +15,7 @@ This service is responsible for managing users in the microservices project.
 1. **Clone the repository:**
 
    ```sh
-   git clone https://github.com/yourusername/microservices-project.git
+   git clone https://github.com/LuccaRebelloToledo/microservices-project.git
    cd microservices-project/users
    ```
 

@@ -18,19 +18,17 @@ class UserController {
 
     await showUsersSchema.parseAsync({ id });
 
-    console.log(id)
-
     const user = await showUsers(id);
 
     return res.json(user);
   }
 
   async create(req, res) {
-    const user = req.body;
+    const userData = req.body;
 
-    await createUsersSchema.parseAsync(user);
+    await createUsersSchema.parseAsync(userData);
 
-    const createdUser = await createUsers(user);
+    const createdUser = await createUsers(userData);
 
     return res.status(CREATED).json(createdUser);
   }
