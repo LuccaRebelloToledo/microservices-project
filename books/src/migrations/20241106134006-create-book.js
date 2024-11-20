@@ -21,7 +21,8 @@ module.exports = {
         allowNull: false
       },
       status: {
-        type: Sequelize.STRING,
+        type: Sequelize.ENUM,
+        values: [BookStatus.AVAILABLE, BookStatus.BORROWED],
         allowNull: false,
         defaultValue: BookStatus.AVAILABLE
       },
