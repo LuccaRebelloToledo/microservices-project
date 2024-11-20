@@ -1,5 +1,7 @@
 const { z } = require('zod');
 
+const { BookStatus } = require('../constants/book.constants');
+
 const REQUIRED_MESSAGE = (field) => `${field} é um campo obrigatório!`;
 
 const showBooksSchema = z.object({
@@ -11,12 +13,12 @@ const createBooksSchema = z.object({
   author: z.string({ message: REQUIRED_MESSAGE('author') }),
 });
 
-const updateBooksAvailableSchema = z.object({
-  available: z.boolean({ message: REQUIRED_MESSAGE('available' )}),
-})
+const updateBooksStatusSchema = z.object({
+  status: z.enum([BookStatus.AVAILABLE, BookStatus.BORROWED], { message: 'O status deve ser "DISPONÍVEL" ou "EMPRESTADO' })
+});
 
 module.exports = {
   showBooksSchema,
   createBooksSchema,
-  updateBooksAvailableSchema,
+  updateBooksStatusSchema,
 };
