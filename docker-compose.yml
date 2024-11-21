@@ -1,0 +1,50 @@
+services:
+  users:
+    build: ./users
+    ports:
+      - "${USERS_PORT}:${USERS_PORT}"
+    environment:
+      - NODE_ENV=production
+      - PORT=${USERS_PORT}
+    networks:
+      - microservices-network
+    volumes:
+      - users-data:/users/data
+
+  books:
+    build: ./books
+    ports:
+      - "${BOOKS_PORT}:${BOOKS_PORT}"
+    environment:
+      - NODE_ENV=production
+      - PORT=${BOOKS_PORT}
+    networks:
+      - microservices-network
+    volumes:
+      - books-data:/books/data
+
+  loans:
+    build: ./loans
+    ports:
+      - "${LOANS_PORT}:${LOANS_PORT}"
+    environment:
+      - NODE_ENV=production
+      - PORT=${LOANS_PORT}
+      - USERS_SERVICE_URL=http://users:${USERS_PORT}
+      - BOOKS_SERVICE_URL=http://books:${BOOKS_PORT}
+    depends_on:
+      - users
+      - books
+    networks:
+      - microservices-network
+    volumes:
+      - loans-data:/loans/data
+
+networks:
+  microservices-network:
+    driver: bridge
+
+volumes:
+  users-data:
+  books-data:
+  loans-data:
