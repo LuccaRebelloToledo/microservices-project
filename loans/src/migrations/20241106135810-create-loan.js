@@ -1,6 +1,6 @@
 'use strict';
 
-const { TYPE } = require('../constants/loan.constants');
+const { LoanType } = require('../constants/loan.constants');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
       },
       type: {
         type: Sequelize.ENUM,
-        values: [TYPE.LOAN, TYPE.RETURN],
+        values: [LoanType.LOAN, LoanType.RETURN],
         allowNull: false
       },
       createdAt: {

@@ -11,6 +11,6 @@ booksRouter.get('/:id', bookController.show);
 
 booksRouter.post('/', bookController.create);
 
-booksRouter.put('/:id', bookController.update);
+booksRouter.patch('/:id', bookController.update);
 
 module.exports = booksRouter;

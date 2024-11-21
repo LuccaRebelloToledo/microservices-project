@@ -4,6 +4,8 @@ const { getReasonPhrase } = require('http-status-codes');
 
 const AppError = require('../errors/app-error')
 
+const { AxiosError } = require('axios');
+
 const { BAD_REQUEST, INTERNAL_SERVER_ERROR } = require('../http/http-status-code')
 
 const globalErrorHandler = (err, req, res, next) => {
@@ -20,6 +22,13 @@ const globalErrorHandler = (err, req, res, next) => {
   if(err instanceof AppError) {
     const statusCode = err.statusCode;
     const message = err.message;
+
+    return res.status(statusCode).json({ statusCode, error: getReasonPhrase(statusCode), message });
+  }
+
+  if(err instanceof AxiosError) {
+    const statusCode = err.response.data.statusCode;
+    const message = err.response.data.message;
 
     return res.status(statusCode).json({ statusCode, error: getReasonPhrase(statusCode), message });
   }

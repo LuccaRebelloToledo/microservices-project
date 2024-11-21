@@ -8,14 +8,14 @@ const globalErrorHandler = require('./shared/middlewares/global-error-handler.mi
 const loansRouter = require('./routes/loan.routes');
 
 const app = express();
-const PORT = process.env.PORT || 4001;
+const PORT = process.env.PORT || 4000;
 
 app.use(express.json());
 
-app.use(loansRouter);
+app.use('/loans', loansRouter);
 
 app.use(globalErrorHandler);
 
 app.listen(PORT, () => {
   console.log(`Loans Service running at port: ${PORT}`);
-})
+});
