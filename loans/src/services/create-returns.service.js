@@ -13,7 +13,7 @@ const showLoansService = require("./show-loans.service");
 
 const AppError = require("../shared/errors/app-error");
 const AppErrorTypes = require("../shared/errors/app-error-types");
-const { CONFLICT } = require("../../../books/src/shared/http/http-status-code");
+const { CONFLICT } = require("../shared/http/http-status-code");
 
 const createReturnsService = async (id) => {
   const loan = await showLoansService(id);
