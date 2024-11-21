@@ -1,6 +1,6 @@
-const TYPE = {
-  LOAN: 'LOAN',
-  RETURN: 'RETURN',
+const LoanType = {
+  LOAN: 'EMPRÉSTIMO',
+  RETURN: 'RETORNO',
 }
 
-module.exports = { TYPE }
+module.exports = { LoanType }

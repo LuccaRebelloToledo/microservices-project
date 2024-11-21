@@ -1,6 +1,6 @@
 'use strict';
 const {
-  TYPES
+  LoanType
 } = require('../constants/loan.constants');
 const {
   Model
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
   Loan.init({
     userId: { type: DataTypes.INTEGER, allowNull: false },
     bookId: { type: DataTypes.INTEGER, allowNull: false },
-    type: { type: DataTypes.ENUM, values: [TYPES.LOAN, TYPES.RETURN], allowNull: false }
+    type: { type: DataTypes.ENUM, values: [LoanType.LOAN, LoanType.RETURN], allowNull: false }
   }, {
     sequelize,
     modelName: 'Loan',

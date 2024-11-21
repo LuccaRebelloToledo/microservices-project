@@ -1,6 +1,6 @@
 const AppErrorTypes = {
   books: {
-    notFound: 'O(s) livro(s) não foi(foram) encontrado(s).',
+    notFound: 'Nenhum livro foi encontrado.',
     alreadyExists: 'O livro com o título e autor fornecidos já existe.'    
   }
 }
