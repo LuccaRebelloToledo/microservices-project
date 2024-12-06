@@ -1,78 +1,116 @@
-# **Microservices Project** 🚀
+# Microservices Project 🚀
 
-This repository contains a setup for three microservices: **Users**, **Books**, and **Loans**, containerized using Docker and orchestrated with Docker Compose. These services collectively manage user information, books, and loan records.
+Este repositório contém a configuração de três microserviços: **Users**, **Books**, e **Loans**, todos containerizados com Docker e orquestrados com Docker Compose. Esses serviços gerenciam informações de usuários, livros e registros de empréstimos.
 
-## **Requirements** 📋
+## Requisitos 📋
+- **Node.js**: Versão 20 ou superior
+- **Docker**: Instalada e em execução 🐳
+- **Docker Compose**: Instalado e compatível com sua versão do Docker
 
-- **Node.js**: Version 20 or later  
-- **Docker**: Installed and running 🐳
-- **Docker Compose**: Installed and compatible with your Docker version 
+## Visão Geral dos Serviços 🛠️
 
-## **Services Overview** 🛠️
+### 1. **Users Service** 👤
+Gerencia dados de usuários, incluindo criação, atualizações e recuperação.
 
-### **1. Users Service** 👤  
-Manages user data, including creation, updates, and retrieval.  
+### 2. **Books Service** 📚
+Gerencia o inventário de livros e operações relacionadas.
 
-### **2. Books Service** 📚
-Handles book inventory and related operations.  
+### 3. **Loans Service** 🔄
+Rastreia empréstimos de livros, conectando usuários e livros.
 
-### **3. Loans Service** 🔄
-Tracks book loans, linking users and books.  
+## Configuração e Uso ⚙️
 
-## **Setup & Usage** ⚙️
+### Passo 1: Configuração do Ambiente 🌍
+1. Crie um arquivo `.env` na raiz do diretório.
+2. Defina as seguintes variáveis de ambiente:
+   ```bash
+   USERS_PORT=<porta_desejada_para_o_serviço_de_usuários>
+   BOOKS_PORT=<porta_desejada_para_o_serviço_de_livros>
+   LOANS_PORT=<porta_desejada_para_o_serviço_de_empréstimos>
 
-### **Step 1: Environment Configuration** 🌍
-1. Create a `.env` file in the root directory.
-2. Define the following environment variables:  
-   ```dotenv
-   USERS_PORT=<desired_users_service_port>
-   BOOKS_PORT=<desired_books_service_port>
-   LOANS_PORT=<desired_loans_service_port>
-   ```
+### Passo 2: Subindo os Serviços 🌍
+1. Construa e inicie os serviços usando o Docker Compose:
 
-### **Step 2: Launch the Services** 🚀
-1. Build and start the services using Docker Compose:
-    ```sh
-    docker-compose up --build -d
-    ```
-2. Verify the services are running:
-    ```sh
+```bash
+   docker-compose up --build -d
+```
+
+2. Verificar serviços em execução:
+
+```bash
     docker ps
-    ```
+```
 
-### **Step 3: Access the Services** 🌐
-Access each service in your browser or via an API client like Insomnia or Postman:
-- **Users Service**: http://localhost:`USERS_PORT`
-- **Books Service**: http://localhost:`BOOKS_PORT`
-- **Loans Service**: http://localhost:`LOANS_PORT`
+### Passo 3: Acessando os Serviços 🌐
+1. Acesse cada serviço no seu navegador ou via um cliente API como Insomnia ou Postman:
 
-### **Step 4: Test with Insomnia** 🧪
-1. Import the provided [Insomnia configuration](insomnia/Insomnia_2024-11-20.json) into your Insomnia workspace.
-2. Use the pre-configured endpoints to interact with the services.
+- **User Service**: (http://localhost:<USERS_PORT>)
+- **Book Service**: (http://localhost:<BOOKS_PORT>)
+- **Loan Service**: (http://localhost:<LOANS_PORT>)
 
-## **Development Notes** 🛠️
-- **Container Logs**: To view logs for a specific service:
-docker logs `container_name`
-Replace `container_name` with the service container name, e.g., users_service.
+### Passo 4: Testando com Insomnia 🧪
+1. Importe o arquivo de configuração do Insomnia para o seu workspace no Insomnia.
+2. Use os endpoints preconfigurados para interagir com os serviços.
 
-- **Stopping Services**:
-`docker-compose down`
+Para importar o arquivo do Insomnia:
+- Abra o Insomnia
+- Vá até Workspace -> Import
+- Selecione o arquivo `Insomnia_2024-11-20.json` da pasta `insomnia/`
+- 
+### Endpoints Preconfigurados no Insomnia
+Aqui estão alguns dos principais endpoints configurados no arquivo do Insomnia:
 
-- **Rebuilding Services** (when dependencies or code changes):
-`docker-compose up --build -d`
+Users Service:
 
-## **Directory Structure** 📂
+- `GET /users`: Lista todos os usuários.
+- `POST /users`: Cria um novo usuário.
+- `GET /users/:id`: Obtém detalhes de um usuário específico.
+
+Books Service:
+
+- `GET /books`: Lista todos os livros.
+- `POST /books`: Cria um novo livro.
+- `PATCH /books/:id`: Atualiza o status de um livro (por exemplo, marcando como "EMPRESTADO").
+
+Loans Service:
+
+- `GET /loans`: Lista todos os empréstimos.
+- `POST /loans`: Cria um novo empréstimo.
+- `POST /loans/:id/returns`: Marca um empréstimo como devolvido.
+
+### Notas de Desenvolvimento 🛠️
+- Logs dos Containers: Para visualizar os logs de um serviço específico, execute:
+
+```bash
+docker logs <container_name>
+Substitua <container_name> pelo nome do container, como users_service.
+```
+
+Parar os Serviços:
+
+```bash
+docker-compose down
+```
+
+Reconstruir os Serviços (quando houver mudanças no código ou dependências):
+
+```bash
+docker-compose up --build -d
+```
+
+### Estrutura de Diretórios 📂
 ```
 microservices-project/
-├── users/
-├── books/
-├── loans/
-├── docker-compose.yml
-├── .env.example
-└── insomnia/
-└── Insomnia_2024-11-20.json
+├── users/                     # Código e Dockerfile para o serviço de usuários
+├── books/                     # Código e Dockerfile para o serviço de livros
+├── loans/                     # Código e Dockerfile para o serviço de empréstimos
+├── docker-compose.yml         # Arquivo para orquestrar os serviços com Docker Compose
+├── .env.example               # Arquivo de exemplo para configurar as variáveis de ambiente
+└── insomnia/                  
+    └── Insomnia_2024-11-20.json # Arquivo de configuração do Insomnia para testes de API
 ```
 
-- Each service (`users/`, `books/`, `loans/`) contains its own Dockerfile and application code.
-- The .env.example file provides a template for required environment variables.
-- The insomnia/ folder contains a pre-configured Insomnia file for API testing
+Cada serviço (`users/`, `books/`, `loans/`) contém seu próprio Dockerfile e código de aplicação.
+O arquivo `.env.example` serve como modelo para as variáveis de ambiente necessárias.
+A pasta `insomnia/` contém o arquivo pré-configurado do Insomnia para testar as APIs.
+
